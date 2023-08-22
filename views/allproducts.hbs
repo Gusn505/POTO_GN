@@ -1,0 +1,44 @@
+<section class="page-top">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="breadcrumb">
+					<li><a href="/auth/registerProducts">Home</a></li>
+					<li class="active">Products</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h1>List of Products</h1>
+			</div>
+		</div>
+	</div>
+</section>
+{{#if products}}
+<ul class="people_list">
+	{{#each products}}
+	<div class="row">
+		<ul class="portfolio-list sort-destination" data-sort-id="portfolio">
+			<li class="col-sm-6 col-xs-12 isotope-item websites">
+				<div class="portfolio-item img-thumbnail">
+					<a href="/auth/addProduct/{{this.id}}" class="thumb-info">
+						<img alt="" width="560" height="375" class="img-responsive" src="{{this.image}}">
+						<span class="thumb-info-title">
+							<span class="thumb-info-inner">{{this.namep}} </span>
+							<span class="thumb-info-type">${{this.price}}</span>
+						</span>
+						<span class="thumb-info-action">
+							<span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
+						</span>
+					</a>
+				</div>
+			</li>
+	</div>
+
+	{{/each}}
+</ul>
+{{else}}
+<h1>No users</h1>
+{{/if}}
+

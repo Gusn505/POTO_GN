@@ -1,0 +1,96 @@
+<section class="page-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="breadcrumb">
+          <li><a href="/auth/registerProducts">Home</a></li>
+          <li class="active">Add Product</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h1>List</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="col-sm-6" style="float: none; margin: 0 auto">
+  <div class="featured-box featured-box-secundary default info-content">
+    <div class="box-content">
+      <h4>
+        {{#if product }}
+        Update User Screen
+
+        {{else}}
+        Add new user screen
+        {{/if}}
+      </h4>
+      <form action="" id="" method="post">
+        <div class="form-group">
+          <div class="col-md-12">
+
+          </div>
+        </div>
+    </div>
+    <div class="row" style="padding: 0 10px;">
+      <div class="form-group">
+        <div class="col-md-12">
+          <label>Name of the product</label>
+          <input type="text" value="{{#if product}} {{product.namep}} {{/if}}" class="form-control input-lg"
+            name="namep" style="padding: 10px;" />
+        </div>
+      </div>
+    </div>
+    <div class="row" style="padding: 0 10px;">
+      <div class="form-group">
+        <div class="col-md-6">
+          <label>Price</label>
+          <input type="text" value="{{#if product}} {{product.price}} {{/if}}" class="form-control input-lg"
+            name="price" />
+        </div>
+        <div class="col-md-6">
+          <label>Image</label>
+          <input type="avatar" value="{{#if product}} {{product.image}} {{/if}}" class="form-control input-lg"
+            name="image" />
+        </div>
+      </div>
+    </div>
+    <div class="row" style="padding: 0 10px;">
+      <div class="col-md-12">
+        {{#if product}}
+        <button type="button" class="delete btn btn-primary pull-left  " data-id="{{product.id}}"
+          style="background-color: rgb(0, 204, 255);border-color:rgb(0, 204, 255) !important;">Delete</button>
+        {{/if}}
+        <input type="submit" value="{{#if product}}Update product{{else}}Add product{{/if}}"
+          class="btn btn-primary pull-right push-bottom" data-loading-text="Loading..." />
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+</div>
+
+<script>
+  $(".delete").on("click", function (event) {
+    event.preventDefault(); // Evita el envío del formulario
+
+    let id = $(this).data("id");
+
+    fetch(`/auth/deleteProduct/${id}`, {
+      method: "DELETE"
+    })
+      .then((response) => {
+        if (response.ok) {
+          $(this).parent().parent().parent().remove();
+          window.location.href = "/auth/allProducts"
+        } else {
+          console.error("Error deleting the product");
+        }
+      })
+      .catch((error) => {
+        console.error("Error in the DELETE request:", error);
+      });
+  });
+</script>
